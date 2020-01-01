@@ -1,0 +1,38 @@
+{
+  "name": "@craftkit/craft-widget-stickyheadernavi",
+  "version": "1.0.0",
+  "description": "Sticky header navigation system with parallax scrolling effect, for both browser and PWA.",
+  "main": "index.js",
+  "module": "index.js",
+  "unpkg": "dist/craft-widget-stickyheadernavi.min.js",
+  "dependencies": {
+    "craft-uikit": "https://github.com/craftkit/craft-uikit"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "wabpack --config config/webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craftkit/craft-widget-stickyheadernavi.git"
+  },
+  "keywords": [
+  	"WebComponents",
+  	"Shadow DOM",
+  	"OOP",
+  	"SPA",
+  	"PWA",
+  	"frontend",
+	"UI widget",
+	"Stack navigation",
+	"Sticky header",
+	"Large header"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/craftkit/craft-widget-stickyheadernavi/issues"
+  },
+  "homepage": "https://github.com/craftkit/craft-widget-stickyheadernavi"
+}
