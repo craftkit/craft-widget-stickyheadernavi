@@ -29,8 +29,8 @@ Direct use:
 or webpack style:
 
 ```javascript 
-import * as Craft from 'craft-uikit';
-import * as StickyHeaderNavi from 'craft-widget-stickyheadernavi';
+import * as Craft from '@craftkit/craft-uikit';
+import * as StickyHeaderNavi from '@craftkit/craft-widget-stickyheadernavi';
 
 Craft.usePackage(StickyHeaderNavi);
 
