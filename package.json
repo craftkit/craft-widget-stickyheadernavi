@@ -18,16 +18,16 @@
     "url": "git+https://github.com/craftkit/craft-widget-stickyheadernavi.git"
   },
   "keywords": [
-  	"WebComponents",
-  	"Shadow DOM",
-  	"OOP",
-  	"SPA",
-  	"PWA",
-  	"frontend",
-	"UI widget",
-	"Stack navigation",
-	"Sticky header",
-	"Large header"
+    "WebComponents",
+    "Shadow DOM",
+    "OOP",
+    "SPA",
+    "PWA",
+    "frontend",
+    "UI widget",
+    "Stack navigation",
+    "Sticky header",
+    "Large header"
   ],
   "author": "",
   "license": "MIT",
