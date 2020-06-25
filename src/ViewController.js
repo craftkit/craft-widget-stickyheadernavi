@@ -196,7 +196,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 				window.history.replaceState(
 					{ componentId:this.currentView.componentId, timestamp:Date.now() },
 					this.currentView.title,
-					this.currentView.path
+					Craft.Core.Context.getRouter().normalize(this.currentView.path)
 				);
 			}else{
 				if( !event ){
@@ -204,7 +204,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 					window.history.pushState(
 						{ componentId:this.currentView.componentId, timestamp:Date.now() },
 						this.currentView.title,
-						this.currentView.path
+						Craft.Core.Context.getRouter().normalize(this.currentView.path)
 					);
 				}
 			}
@@ -267,7 +267,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 				window.history.pushState(
 					{ componentId:this.currentView.componentId, timestamp:Date.now() },
 					this.currentView.title,
-					this.currentView.path
+					Craft.Core.Context.getRouter().normalize(this.currentView.path)
 				);
 			}
 			
