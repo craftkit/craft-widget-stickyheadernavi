@@ -1,12 +1,12 @@
 {
   "name": "@craftkit/craft-widget-stickyheadernavi",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Sticky header navigation system with parallax scrolling effect, for both browser and PWA.",
   "main": "index.js",
   "module": "index.js",
   "unpkg": "dist/craft-widget-stickyheadernavi.min.js",
   "dependencies": {
-    "@craftkit/craft-uikit": "^2.x"
+    "@craftkit/craft-uikit": "*"
   },
   "devDependencies": {},
   "scripts": {
