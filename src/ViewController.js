@@ -181,7 +181,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 			this.stack.push(appearingView);
 			this.contents_holder.appendChild(appearingView.view);
 			
-			appearingView.show();
+			appearingView.showComponent();
 			appearingView.viewDidAppear();
 			
 			this.currentView = appearingView;
@@ -258,7 +258,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		
 		appearingView.viewWillAppear( () => {
 			this.contents_holder.appendChild(appearingView.view);
-			appearingView.show();
+			appearingView.showComponent();
 			appearingView.viewDidAppear();
 			
 			this.currentView = appearingView;
