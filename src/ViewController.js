@@ -176,6 +176,11 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		}
 		
 		appearingView.viewWillAppear( () => {
+			if( disappearingView ){
+				disappearingView.viewDidDisappear();
+				disappearingView.view.remove();
+			}
+			
 			this.Pages[appearingView.componentId] = { page: appearingView };
 			
 			this.stack.push(appearingView);
@@ -185,11 +190,6 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 			appearingView.viewDidAppear();
 			
 			this.currentView = appearingView;
-			
-			if( disappearingView ){
-				disappearingView.viewDidDisappear();
-				disappearingView.view.remove();
-			}
 			
 			if( launch ){
 				// launching the app
@@ -257,6 +257,10 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		}
 		
 		appearingView.viewWillAppear( () => {
+			delete this.Pages[disappearingView.componentId];
+			disappearingView.viewDidDisappear();
+			disappearingView.view.remove();
+			
 			this.contents_holder.appendChild(appearingView.view);
 			appearingView.showComponent();
 			appearingView.viewDidAppear();
@@ -279,10 +283,6 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 				this.backbtn.view.style['display'] = 'none';
 				this.header.onDisappearBackButton();
 			}
-			
-			delete this.Pages[disappearingView.componentId];
-			disappearingView.viewDidDisappear();
-			disappearingView.view.remove();
 			
 			if( callback ){ callback(); }
 		});
