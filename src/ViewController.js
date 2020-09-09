@@ -21,6 +21,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 	 * @param {Object} options.header - Header contents
 	 * @param {Boolean} options.enableSwipeBack - true to enable page back by swipe gesture (default false)
 	 * @param {Craft.UI.View|Craft.UI.ViewController|Craft.Widget.StickyHeaderNavi.Page} options.page - initial page (not work if you call bringup() at start)
+	 * @param {Boolean} options.custombackbtn - use custom back button instead of framework prepared one
 	 */
 	constructor(options){
 		super();
@@ -35,6 +36,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		this.header      = options.header;
 		this.backbtn     = options.backbtn;
 		this.initialPage = options.page; // this.initialPage will be deleted after appended to the this.contents_holder, and moved to this.currentView
+		this.custombackbtn = options.custombackbtn; // boolean
 		
 		this.enableSwipeBack = options.enableSwipeBack;
 		
@@ -42,6 +44,9 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		if( !Craft.UI.Device.isStandaloneMode() ){
 			this.backbtn = null;
 			this.enableSwipeBack = false;
+		}
+		if( this.custombackbtn ){
+			this.backbtn = null; // this.backbtn should be defined by deployCustomBackBtn implementation
 		}
 	}
 	
@@ -69,14 +74,20 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		this.header.viewDidAppear();
 		
 		// setup back button
-		if( this.backbtn ){
-			this.backbtn.setViewController(this);
-			if( !this.backbtn.isViewLoaded ){
-				this.backbtn.loadView();
+		if( this.custombackbtn ){
+			// delegate defining this.backbtn
+			this.deployCustomBackBtn(); 
+		}else{
+			// define this.backbtn by myself
+			if( this.backbtn ){
+				this.backbtn.setViewController(this);
+				if( !this.backbtn.isViewLoaded ){
+					this.backbtn.loadView();
+				}
+				this.backbtn.viewWillAppear();
+				this.back_holder.appendChild(this.backbtn.view);
+				this.backbtn.viewDidAppear();
 			}
-			this.backbtn.viewWillAppear();
-			this.back_holder.appendChild(this.backbtn.view);
-			this.backbtn.viewDidAppear();
 		}
 		
 		// enable swipe right to page back
@@ -143,6 +154,35 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		});
 		this.observer.observe(this.marker);
 	}
+	
+	/** 
+	 * Define custom back button (this.backbtn)
+	 * 
+	 * If you would like to use your own customized back button instead of framework prepared way, 
+	 * you have to set custombackbtn:true flag to the constructor, 
+	 * and implement deployCustomBackBtn delegation method 
+	 * with code instantiating and placing your back button to the DOM tree then setting it to the ViewController.backbtn. 
+	 * 
+	 * BTW, you may delegate deployCustomBackBtn() to your Header implementation. 
+	 * The back button may be in your header. 
+	 * 
+	 * @example
+	 * 
+	 * deployCustomBackBtn(){
+	 *     // delegate to header
+	 *     this.header.deployCustomBackBtn();
+	 * }
+	 * 
+	 * // in header implementation
+	 * deployCustomBackBtn(){
+	 *     this.views.backbtn = new MyBackBtn();
+	 *     this.appendView(this.views.backbtn);
+	 *     this.viewController.backbtn = this.views.backbtn;
+	 * }
+	 * 
+	 * @protected
+	 */
+	deployCustomBackBtn(){}
 	
 	// *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    *    * 
 	
