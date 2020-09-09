@@ -42,11 +42,15 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		
 		// BackButton and swipeback is only available in the standalone mode.
 		if( !Craft.UI.Device.isStandaloneMode() ){
+			// browser mode
 			this.backbtn = null;
 			this.enableSwipeBack = false;
-		}
-		if( this.custombackbtn ){
-			this.backbtn = null; // this.backbtn should be defined by deployCustomBackBtn implementation
+			this.custombackbtn = false; // cancel for browser mode
+		}else{
+			// standalone
+			if( this.custombackbtn ){
+				this.backbtn = null; // this.backbtn should be defined by deployCustomBackBtn implementation
+			}
 		}
 	}
 	
@@ -158,13 +162,13 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 	/** 
 	 * Define custom back button (this.backbtn)
 	 * 
-	 * If you would like to use your own customized back button instead of framework prepared way, 
-	 * you have to set custombackbtn:true flag to the constructor, 
-	 * and implement deployCustomBackBtn delegation method 
-	 * with code instantiating and placing your back button to the DOM tree then setting it to the ViewController.backbtn. 
+	 * If you would like use your own customized back button instead of framework prepared one,
+	 * you have to set custombackbtn:true flag to constructor,
+	 * and implement deployCustomBackBtn delegation method
+	 * with code instantiating your back button and setting this.backbtn.
 	 * 
-	 * BTW, you may delegate deployCustomBackBtn() to your Header implementation. 
-	 * The back button may be in your header. 
+	 * BTW, you may delegate deployCustomBackBtn() to your Header implementation.
+	 * (The back button may be on your header)
 	 * 
 	 * @example
 	 * 
