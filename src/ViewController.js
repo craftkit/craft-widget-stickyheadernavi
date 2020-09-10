@@ -217,6 +217,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		
 		if( disappearingView ){
 			disappearingView.viewWillDisappear();
+			this.Pages[disappearingView.componentId].scrollTop = document.documentElement.scrollTop;
 		}
 		
 		appearingView.viewWillAppear( () => {
@@ -225,7 +226,7 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 				disappearingView.view.remove();
 			}
 			
-			this.Pages[appearingView.componentId] = { page: appearingView };
+			this.Pages[appearingView.componentId] = { page:appearingView, scrollTop:0 };
 			
 			this.stack.push(appearingView);
 			this.contents_holder.appendChild(appearingView.view);
@@ -301,6 +302,12 @@ export class ViewController extends Craft.UI.DefaultRootViewController {
 		}
 		
 		appearingView.viewWillAppear( () => {
+			if( this.Pages[appearingView.componentId].scrollTop ){
+				document.documentElement.scrollTop = this.Pages[appearingView.componentId].scrollTop;
+			}else{
+				document.documentElement.scrollTop = 0;
+			}
+			
 			delete this.Pages[disappearingView.componentId];
 			disappearingView.viewDidDisappear();
 			disappearingView.view.remove();
